@@ -1,0 +1,69 @@
+#app{
+    align-items: center;
+}
+
+.primaryBtn{
+    background: #007cba;
+    color: #ffffff;
+    padding: 5px;
+    border: solid #007cba;
+    font-size: medium;
+}
+
+.redBtn{
+    background: #f74b4b;
+    color: #ffffff;
+    padding: 5px;
+    border: solid #f74b4b;
+    font-size: medium;
+}
+
+.centerItem{
+    display: flex;
+    justify-content: center;
+}
+
+.row{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.fullWidth{
+    width: 100%;
+}
+
+.col-25ptg{
+    width: 23%;
+}
+
+.col-50ptg{
+    width: 50%;
+}
+
+.col-33ptg{
+    width: 30%;
+}
+
+.col-75ptg{
+    width: 75%;
+}
+
+.col-100ptg{
+    width: 100%;
+}
+
+.p-all-10px{
+    padding: 10px;
+}
+
+.p-all-15px{
+    padding: 15px;
+}
+
+.m-all-10px{
+    margin: 10px;
+}
+
+.m-all-15px{
+    margin: 15px;
+}
