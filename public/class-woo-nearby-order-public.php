@@ -102,9 +102,9 @@ class Woo_Nearby_Order_Public {
 
 	public function checkout_order($order_id){
 		$order = new WC_Order($order_id);
-		$orderMeta = $_order->get_meta("location");
+		$orderMeta = $order->get_meta("location");
 		if($orderMeta){
-			$location = explode(",", $_order->get_meta("location"));
+			$location = explode(",", $order->get_meta("location"));
 			$args = array("role" => "shop_manager");
 			$users = get_users($args);
 			$_distance = array();
