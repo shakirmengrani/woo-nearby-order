@@ -120,6 +120,11 @@ class Woo_Nearby_Order_Admin {
 				<input type="text" name="lng" placeholder="Enter Longitude" class="fullWidth" value="<?php echo get_the_author_meta('user_lng', $user->ID) ?>" />
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-100ptg p-all-15px">
+				<input type="text" name="user_address" placeholder="Enter address" class="fullWidth" value="<?php echo get_the_author_meta('user_address', $user->ID) ?>" />
+			</div>
+		</div>
 		<?php
 	}
 
@@ -130,6 +135,7 @@ class Woo_Nearby_Order_Admin {
 			if(isset($_POST["lat"]) && isset($_POST["lng"])){
 				update_usermeta($user_id, "user_lat", $_POST["lat"]);
 				update_usermeta($user_id, "user_lng", $_POST["lng"]);
+				update_usermeta($user_id, "user_address", $_POST["user_address"]);
 			}
 		}
 	}

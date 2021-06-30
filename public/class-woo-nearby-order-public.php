@@ -47,11 +47,20 @@ class Woo_Nearby_Order_Public {
 	 * @param      string    $plugin_name       The name of the plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
+
+	 /**
+     * The namespace to add to the api calls.
+     *
+     * @var string The namespace to add to the api call
+     */
+    private $namespace;
+
+
 	public function __construct( $plugin_name, $version ) {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
-
+		$this->namespace = $this->plugin_name . "/v". intval($this->version);
 	}
 
 	/**
@@ -98,6 +107,35 @@ class Woo_Nearby_Order_Public {
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/woo-nearby-order-public.js', array( 'jquery' ), $this->version, false );
 
+	}
+	
+	public function make_routes(){
+		register_rest_route($this->namespace,"shops",array(
+			"methods" => "GET",
+			"callback" => array($this, 'get_shop_managers')
+		));
+	}
+
+
+	public function get_shop_managers(){
+		$args = array(
+			'role'    => 'shop_manager',
+		);
+		$users = get_users( $args );
+		foreach ($users as $key => $value) {
+			$users = array_map(function($user){
+				$meta = get_user_meta($user->ID);
+				return array(
+					"ID" => $user->ID,
+					"name" => $user->display_name,
+					"details" => array(
+						"location" => $meta["user_lat"][0] . ", " . $meta["user_lng"][0],
+						"address" => $meta["user_address"][0]
+					) 
+				);
+			}, $users);
+		}
+		return $users;
 	}
 
 	public function checkout_order($order_id){
